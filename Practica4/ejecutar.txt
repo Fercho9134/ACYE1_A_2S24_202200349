@@ -1,0 +1,20 @@
+Lineas para ejecutar:
+aarch64-linux-gnu-as -mcpu=cortex-a57 calculadora.s -o calculadora.o
+aarch64-linux-gnu-ld calculadora.o -o calculadora
+qemu-aarch64 -g 1234 ./calculadora (Con depuracion debuggin)
+qemu-aarch64 ./calculadora (Sin depuracion)
+
+
+En otra terminal:
+gdb-multiarch -q --nh \
+  -ex 'set architecture aarch64' \
+  -ex 'file calculadora' \
+  -ex 'target remote localhost:1234' \
+  -ex 'layout split' \
+  -ex 'layout regs'
+
+
+Comandos importantes:
+ stepi paso a paso
+ next hasta el proximo breakpoint
+ continue todo
